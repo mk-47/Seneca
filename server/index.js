@@ -2,16 +2,16 @@ var seneca = require('seneca')();
 var jsonfile = require ('jsonfile');
 var fs = require('fs');
 
-//var data = require ("./MOCK_DATA.json")
+var data = require ("./MOCK_DATA.json")
 
-seneca.add("role:list,cmd:read", function(msg, done) {
+// seneca.add("role:list,cmd:read", function(msg, done) {
    
    
-    jsonfile.readFile ('./MOCK_DATA.json', function (err, obj){
-        done(null, {Incidents: obj});
-     })
+//     jsonfile.readFile ('./MOCK_DATA.json', function (err, obj){
+//         done(null, {Incidents: obj});
+//      })
 
-})
+// })
 
 // seneca.add("role:add,cmd:write", function(msg,done)
 // {
@@ -45,4 +45,19 @@ seneca.add("role:list,cmd:read", function(msg, done) {
 //     }
 // })
 // })
+
+seneca.add("role:incident,cmd:get", function(msg, done) {
+    
+        var user = data.filter(function(usr) { return usr.id == msg.id});
+        var error =null;
+        if (user.length === 0 ) {
+            error = Error ("user not found");
+    
+        }
+        else{
+            user = user[0]
+        }
+        
+        done(error, {"user" : user})
+    })
 seneca.listen(8085);
