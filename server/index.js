@@ -4,14 +4,14 @@ var fs = require('fs');
 
 var data = require ("./incidents.json")
 
-// seneca.add("role:list,cmd:read", function(msg, done) {
+seneca.add("role:list,cmd:read", function(msg, done) {
    
    
-//     jsonfile.readFile ('./incidents.json', function (err, obj){
-//         done(null, {Incidents: obj});
-//      })
+    jsonfile.readFile ('./incidents.json', function (err, obj){
+        done(null, {Incidents: obj});
+     })
 
-// })
+})
 
 // seneca.add("role:add,cmd:write", function(msg,done)
 // {
